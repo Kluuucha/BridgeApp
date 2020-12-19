@@ -31,7 +31,7 @@ class PlayerHandActivity : AppCompatActivity() {
         }
 
         val player = findViewById<View>(R.id.currentHandPlayerText) as TextView
-        player.text = rubber.playerNames[rubber.latestGame.latestPlay.dealHistory.currentPlayer]
+        player.text = rubber.playerNames!![rubber.latestGame.latestPlay.dealHistory!!.currentPlayer]
 
         val startButton = findViewById<View>(R.id.startHandButton) as Button
 

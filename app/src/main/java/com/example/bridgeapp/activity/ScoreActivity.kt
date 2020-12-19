@@ -42,7 +42,7 @@ class ScoreActivity : AppCompatActivity() {
 
             table.addView(getLabel(0))
 
-            for (p: PointObject in rubber.latestGame.latestPlay.pointHistory.pointsBelowLine) {
+            for (p: PointObject in rubber.latestGame.latestPlay.pointHistory!!.pointsBelowLine!!) {
                 val row = TableRow(this)
 
                 val label = TextView(this)
@@ -61,7 +61,7 @@ class ScoreActivity : AppCompatActivity() {
 
                 table.addView(row)
             }
-            for (p: PointObject in rubber.latestGame.latestPlay.pointHistory.pointsAboveLine) {
+            for (p: PointObject in rubber.latestGame.latestPlay.pointHistory!!.pointsAboveLine!!) {
                 val row = TableRow(this)
 
                 val label = TextView(this)
@@ -83,8 +83,8 @@ class ScoreActivity : AppCompatActivity() {
 
             table.addView(getLabel(1))
 
-            if (rubber.latestGame.latestPlay.pointHistory.pointsDefence.isNotEmpty())
-                for (p: PointObject in rubber.latestGame.latestPlay.pointHistory.pointsDefence) {
+            if (rubber.latestGame.latestPlay.pointHistory!!.pointsDefence!!.isNotEmpty())
+                for (p: PointObject in rubber.latestGame.latestPlay.pointHistory!!.pointsDefence!!) {
                     val row = TableRow(this)
 
                     val label = TextView(this)
@@ -139,12 +139,12 @@ class ScoreActivity : AppCompatActivity() {
         val label = TextView(this)
 
         if(team == 0){
-            val contractorText = "${rubber.playerNames[rubber.latestGame.latestPlay.bidHistory.contract.player % 2]}/${rubber.playerNames[rubber.latestGame.latestPlay.bidHistory.contract.player % 2 + 2]}"
+            val contractorText = "${rubber.playerNames[rubber.latestGame.latestPlay.bidHistory!!.contract.player % 2]}/${rubber.playerNames[rubber.latestGame.latestPlay.bidHistory!!.contract.player % 2 + 2]}"
             val out = "${resources.getString(R.string.side_declarer)}($contractorText):"
             label.text = out
         }
         else{
-            val defenderText = "${rubber.playerNames[(rubber.latestGame.latestPlay.bidHistory.contract.player + 1) % 2]}/${rubber.playerNames[(rubber.latestGame.latestPlay.bidHistory.contract.player + 1) % 2 + 2]}"
+            val defenderText = "${rubber.playerNames[(rubber.latestGame.latestPlay.bidHistory!!.contract.player + 1) % 2]}/${rubber.playerNames[(rubber.latestGame.latestPlay.bidHistory!!.contract.player + 1) % 2 + 2]}"
             val out = "${resources.getString(R.string.side_defender)}($defenderText):"
             label.text = out
         }

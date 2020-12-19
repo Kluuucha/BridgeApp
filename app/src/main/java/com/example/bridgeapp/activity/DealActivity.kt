@@ -73,15 +73,15 @@ class DealActivity : AppCompatActivity(), View.OnClickListener{
             }
         }
 
-        rubber.latestGame.latestPlay.dealHistory.clearCardList()
+        rubber.latestGame.latestPlay.dealHistory!!.clearCardList()
 
         val setHandButton = findViewById<View>(R.id.setHandButton) as Button
 
         setHandButton.setOnClickListener {
-            rubber.latestGame.latestPlay.dealHistory.setHandForCurrentPlayer(HandObject.fromStringArray(rubber.latestGame.latestPlay.dealHistory.cardList.toTypedArray()))
-            rubber.latestGame.latestPlay.dealHistory.switchPlayer()
+            rubber.latestGame.latestPlay.dealHistory!!.setHandForCurrentPlayer(HandObject.fromStringArray(rubber.latestGame.latestPlay.dealHistory!!.cardList!!.toTypedArray()))
+            rubber.latestGame.latestPlay.dealHistory!!.switchPlayer()
 
-            if(rubber.latestGame.latestPlay.dealHistory.currentPlayer == rubber.latestGame.latestPlay.dealingPlayer){
+            if(rubber.latestGame.latestPlay.dealHistory!!.currentPlayer == rubber.latestGame.latestPlay.dealingPlayer){
                 intent = Intent (this, HandCheckActivity::class.java)
                 intent.putExtra("rubber_data", rubber)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -105,20 +105,20 @@ class DealActivity : AppCompatActivity(), View.OnClickListener{
         if(v is CheckBox){
             println(v.text)
             if(!v.isChecked){
-                rubber.latestGame.latestPlay.dealHistory.removeCard(v.text as String?)
+                rubber.latestGame.latestPlay.dealHistory!!.removeCard(v.text.toString())
             }
             else{
-                if(rubber.latestGame.latestPlay.dealHistory.cardCount() >= 13){
+                if(rubber.latestGame.latestPlay.dealHistory!!.cardCount() >= 13){
                     Toast.makeText(applicationContext, "You cannot check more than 13 cards", Toast.LENGTH_SHORT).show()
                     v.toggle()
                 }
                 else
-                    rubber.latestGame.latestPlay.dealHistory.addCard(v.text as String?)
+                    rubber.latestGame.latestPlay.dealHistory!!.addCard(v.text.toString())
             }
-            val cardCountText = rubber.latestGame.latestPlay.dealHistory.cardCount().toString() + "/13"
+            val cardCountText = rubber.latestGame.latestPlay.dealHistory!!.cardCount().toString() + "/13"
             cardsCount.text = cardCountText
 
-            setHandButton.isEnabled = rubber.latestGame.latestPlay.dealHistory.cardCount() == 13
+            setHandButton.isEnabled = rubber.latestGame.latestPlay.dealHistory!!.cardCount() == 13
         }
     }
 }

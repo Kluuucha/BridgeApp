@@ -45,8 +45,8 @@ class SummaryActivity : AppCompatActivity() {
         var newGame = false
         var newPlay = false
 
-        for(g: GameObject in rubber.games){
-            for(p: PlayObject in g.plays){
+        for(g: GameObject in rubber.games!!){
+            for(p: PlayObject in g.plays!!){
                 if(!p.isNoPointPlay){
                     val rowAbove = TableRow(this)
                     val scoreAbove0 = TextView(this)
@@ -59,19 +59,19 @@ class SummaryActivity : AppCompatActivity() {
                     scoreAbove1.gravity = Gravity.CENTER_HORIZONTAL
                     scoreAbove1.layoutParams = TableRow.LayoutParams(1)
 
-                    if(p.contract.player % 2 == 0){
-                        scoreAbove0.text = PointObject.getTotal(p.pointHistory.pointsAboveLine).toString()
-                        scoreAbove1.text = PointObject.getTotal(p.pointHistory.pointsDefence).toString()
+                    if(p.contract!!.player % 2 == 0){
+                        scoreAbove0.text = PointObject.getTotal(p.pointHistory!!.pointsAboveLine).toString()
+                        scoreAbove1.text = PointObject.getTotal(p.pointHistory!!.pointsDefence).toString()
                     }
-                    else if (p.contract.player % 2 == 1){
-                        scoreAbove1.text = PointObject.getTotal(p.pointHistory.pointsAboveLine).toString()
-                        scoreAbove0.text = PointObject.getTotal(p.pointHistory.pointsDefence).toString()
+                    else if (p.contract!!.player % 2 == 1){
+                        scoreAbove1.text = PointObject.getTotal(p.pointHistory!!.pointsAboveLine).toString()
+                        scoreAbove0.text = PointObject.getTotal(p.pointHistory!!.pointsDefence).toString()
                     }
                     rowAbove.addView(scoreAbove0)
                     rowAbove.addView(scoreAbove1)
                     aboveTable.addView(rowAbove)
 
-                    if(PointObject.getTotal(p.pointHistory.pointsBelowLine) > 0) {
+                    if(PointObject.getTotal(p.pointHistory!!.pointsBelowLine) > 0) {
                         val rowBelow = TableRow(this)
                         val scoreBelow0 = TextView(this)
                         scoreBelow0.textSize = (14).toFloat()
@@ -83,14 +83,14 @@ class SummaryActivity : AppCompatActivity() {
                         scoreBelow1.gravity = Gravity.CENTER_HORIZONTAL
                         scoreBelow1.layoutParams = TableRow.LayoutParams(1)
 
-                        if (p.contract.player % 2 == 0) {
+                        if (p.contract!!.player % 2 == 0) {
                             scoreBelow0.text =
-                                PointObject.getTotal(p.pointHistory.pointsBelowLine).toString()
+                                PointObject.getTotal(p.pointHistory!!.pointsBelowLine).toString()
                             scoreBelow1.text = "0"
                             scoreBelow1.visibility = View.INVISIBLE
-                        } else if (p.contract.player % 2 == 1) {
+                        } else if (p.contract!!.player % 2 == 1) {
                             scoreBelow1.text =
-                                PointObject.getTotal(p.pointHistory.pointsBelowLine).toString()
+                                PointObject.getTotal(p.pointHistory!!.pointsBelowLine).toString()
                             scoreBelow0.text = "0"
                             scoreBelow0.visibility = View.INVISIBLE
                         }
@@ -107,13 +107,13 @@ class SummaryActivity : AppCompatActivity() {
                 val lineRow = View(this)
                 lineRow.layoutParams = LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
-                    ((if(rubber.isFinished) 6 else 2) * resources.displayMetrics.density).toInt()
+                    ((if(rubber.isFinished()) 6 else 2) * resources.displayMetrics.density).toInt()
                 )
                 lineRow.setBackgroundColor(Color.parseColor("#C0C0C0"))
 
                 belowTable.addView(lineRow)
 
-                if(rubber.isFinished){
+                if(rubber.isFinished()){
                     next.visibility = View.INVISIBLE
                     val rowFinal = TableRow(this)
                     val scoreFinal0 = TextView(this)
@@ -128,7 +128,7 @@ class SummaryActivity : AppCompatActivity() {
                     scoreFinal1.setTypeface(null, Typeface.BOLD)
                     scoreFinal1.layoutParams = TableRow.LayoutParams(1)
 
-                    val scores = rubber.scores
+                    val scores = rubber.scores!!
                     scoreFinal0.text = scores[0].toString()
                     scoreFinal1.text = scores[1].toString()
 

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.bridgeapp.R
 import com.example.bridgeapp.logic.PointStageState
 import com.example.bridgeapp.structure.ContractObject
+import com.example.bridgeapp.structure.HandObject
 import com.example.bridgeapp.structure.RubberObject
 import com.example.bridgeapp.util.CardSuit
 import com.example.bridgeapp.util.GameStage
@@ -60,13 +61,13 @@ class CalcActivity : AppCompatActivity() {
 
         if (extras != null) {
             if(extras.containsKey("rubber_data")) {
-                numbers.setSelection(rubber.latestGame.latestPlay.bidHistory.contract.number - 1)
-                suit.setSelection(rubber.latestGame.latestPlay.bidHistory.contract.suit.ordinal)
-                if(rubber.latestGame.latestPlay.bidHistory.contract.doubleVal == 1){
+                numbers.setSelection(rubber.latestGame.latestPlay.bidHistory!!.contract.number - 1)
+                suit.setSelection(rubber.latestGame.latestPlay.bidHistory!!.contract.suit!!.ordinal)
+                if(rubber.latestGame.latestPlay.bidHistory!!.contract.doubleVal == 1){
                     isDouble.isChecked = true
                     isRedouble.isChecked = false
                 }
-                else if (rubber.latestGame.latestPlay.bidHistory.contract.doubleVal == 2){
+                else if (rubber.latestGame.latestPlay.bidHistory!!.contract.doubleVal == 2){
                     isDouble.isChecked = false
                     isRedouble.isChecked = true
                 }
@@ -114,13 +115,14 @@ class CalcActivity : AppCompatActivity() {
                         contract = ContractObject(Integer.parseInt(numbers.selectedItem.toString()), CardSuit.valueOf(suit.selectedItem.toString()), doubleValue, 0)
                     }
                     else
-                        contract = rubber.latestGame.latestPlay.contract
+                        contract = rubber.latestGame.latestPlay.contract!!
                 }
-                rubber.latestGame.latestPlay.pointHistory.setPoints(tricksTaken, contract, rubber.getVulnerability(contract.player%2), rubber.getVulnerability((contract.player+1)%2), rubber.winner, rubber.latestGame.latestPlay.hands)
+                @Suppress("UNCHECKED_CAST")
+                rubber.latestGame.latestPlay.pointHistory!!.setPoints(tricksTaken, contract, rubber.getVulnerability(contract.player%2), rubber.getVulnerability((contract.player+1)%2), rubber.winner, rubber.latestGame.latestPlay.hands as Array<HandObject>)
 
-                outcome.text = rubber.latestGame.latestPlay.pointHistory.scoreContract(tricksTaken, contract).toString()
-                overtricks.text = rubber.latestGame.latestPlay.pointHistory.scoreOvertricks(tricksTaken, contract, rubber.getVulnerability(contract.player%2)).toString()
-                mishaps.text = rubber.latestGame.latestPlay.pointHistory.scoreMishaps(tricksTaken, contract, rubber.getVulnerability(contract.player%2)).toString()
+                outcome.text = rubber.latestGame.latestPlay.pointHistory!!.scoreContract(tricksTaken, contract).toString()
+                overtricks.text = rubber.latestGame.latestPlay.pointHistory!!.scoreOvertricks(tricksTaken, contract, rubber.getVulnerability(contract.player%2)).toString()
+                mishaps.text = rubber.latestGame.latestPlay.pointHistory!!.scoreMishaps(tricksTaken, contract, rubber.getVulnerability(contract.player%2)).toString()
             }
             else
                 Toast.makeText(applicationContext, "Taken tricks must be between 0 and 13", Toast.LENGTH_SHORT).show() // TODO: different way of notification

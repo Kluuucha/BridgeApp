@@ -30,7 +30,7 @@ class HandCheckActivity : AppCompatActivity() {
             }
         }
 
-        if(rubber.latestGame.latestPlay.dealHistory.checkHands()){
+        if(rubber.latestGame.latestPlay.dealHistory!!.checkHands()){
             intent = Intent (this, StartBidStageActivity::class.java)
             intent.putExtra("rubber_data", rubber)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP

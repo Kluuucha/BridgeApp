@@ -68,15 +68,15 @@ class BidActivity : AppCompatActivity() {
             playerArray[i].text = rubber.playerNames[i]
         }
         setColorToPlayers(playerArray)
-        currentBidder.text = rubber.playerNames[rubber.latestGame.latestPlay.bidHistory.currentPlayer]
+        currentBidder.text = rubber.playerNames[rubber.latestGame.latestPlay.bidHistory!!.currentPlayer]
         bidButton.setOnClickListener {
-            if(rubber.latestGame.latestPlay.bidHistory.runBid(Integer.parseInt(numberSpinner.selectedItem.toString()), resources.getStringArray(
+            if(rubber.latestGame.latestPlay.bidHistory!!.runBid(Integer.parseInt(numberSpinner.selectedItem.toString()), resources.getStringArray(
                             R.array.card_color
                     )[suitSpinner.selectedItemPosition].toString())){
-                if(rubber.latestGame.latestPlay.bidHistory.afterDouble())
+                if(rubber.latestGame.latestPlay.bidHistory!!.afterDouble())
                     doubleButton.text = resources.getString(R.string.button_double)
 
-                bidArray[rubber.latestGame.latestPlay.bidHistory.lastBidder].text = rubber.latestGame.latestPlay.bidHistory.lastBid.toString()
+                bidArray[rubber.latestGame.latestPlay.bidHistory!!.lastBidder].text = rubber.latestGame.latestPlay.bidHistory!!.lastBid.toString()
                 passButton.isEnabled = true
                 doubleButton.isEnabled = true
             }
@@ -84,17 +84,17 @@ class BidActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "The bid has to be greater than previous one", Toast.LENGTH_SHORT).show() // TODO: different way of notification
             }
             setColorToPlayers(playerArray)
-            currentBidder.text = rubber.playerNames[rubber.latestGame.latestPlay.bidHistory.currentPlayer]
+            currentBidder.text = rubber.playerNames[rubber.latestGame.latestPlay.bidHistory!!.currentPlayer]
         }
 
         passButton.setOnClickListener{
-            val currentBid = bidArray[rubber.latestGame.latestPlay.bidHistory.currentPlayer]
+            val currentBid = bidArray[rubber.latestGame.latestPlay.bidHistory!!.currentPlayer]
 
-            rubber.latestGame.latestPlay.bidHistory.runPass()
+            rubber.latestGame.latestPlay.bidHistory!!.runPass()
 
-            currentBid.text = rubber.latestGame.latestPlay.bidHistory.lastBid.toString()
+            currentBid.text = rubber.latestGame.latestPlay.bidHistory!!.lastBid.toString()
 
-            if (rubber.latestGame.latestPlay.bidHistory.passOut()) {
+            if (rubber.latestGame.latestPlay.bidHistory!!.passOut()) {
                 bidButton.isEnabled = false
                 passButton.isEnabled = false
 
@@ -112,9 +112,9 @@ class BidActivity : AppCompatActivity() {
                 passButton.visibility = View.INVISIBLE
                 doubleButton.visibility = View.INVISIBLE
 
-                if(rubber.latestGame.latestPlay.bidHistory.hasBids()) {
-                    contract.text = rubber.latestGame.latestPlay.bidHistory.contract.toString()
-                    val contractorText = rubber.playerNames[rubber.latestGame.latestPlay.bidHistory.contract.player%2] + "/" + rubber.playerNames[rubber.latestGame.latestPlay.bidHistory.contract.player%2 + 2]
+                if(rubber.latestGame.latestPlay.bidHistory!!.hasBids()) {
+                    contract.text = rubber.latestGame.latestPlay.bidHistory!!.contract.toString()
+                    val contractorText = rubber.playerNames[rubber.latestGame.latestPlay.bidHistory!!.contract.player%2] + "/" + rubber.playerNames[rubber.latestGame.latestPlay.bidHistory!!.contract.player%2 + 2]
                     contractor.text = contractorText
                 }
                 else{
@@ -124,31 +124,31 @@ class BidActivity : AppCompatActivity() {
 
             doubleButton.isEnabled = false
 
-            if(rubber.latestGame.latestPlay.bidHistory.afterDouble()){
+            if(rubber.latestGame.latestPlay.bidHistory!!.afterDouble()){
                 doubleButton.text = resources.getString(R.string.button_double)
             }
             setColorToPlayers(playerArray)
-            currentBidder.text = rubber.playerNames[rubber.latestGame.latestPlay.bidHistory.currentPlayer]
+            currentBidder.text = rubber.playerNames[rubber.latestGame.latestPlay.bidHistory!!.currentPlayer]
         }
 
         doubleButton.setOnClickListener{
-            if(rubber.latestGame.latestPlay.bidHistory.beforeDouble()) {
+            if(rubber.latestGame.latestPlay.bidHistory!!.beforeDouble()) {
                 doubleButton.text = resources.getString(R.string.button_redouble)
             }
 
-            if(rubber.latestGame.latestPlay.bidHistory.afterDouble() && !rubber.latestGame.latestPlay.bidHistory.afterRedouble()){
+            if(rubber.latestGame.latestPlay.bidHistory!!.afterDouble() && !rubber.latestGame.latestPlay.bidHistory!!.afterRedouble()){
                 doubleButton.text = resources.getString(R.string.button_double)
                 doubleButton.isEnabled = false
             }
 
-            val currentBid = bidArray[rubber.latestGame.latestPlay.bidHistory.currentPlayer]
+            val currentBid = bidArray[rubber.latestGame.latestPlay.bidHistory!!.currentPlayer]
 
-            rubber.latestGame.latestPlay.bidHistory.runDouble()
+            rubber.latestGame.latestPlay.bidHistory!!.runDouble()
 
-            currentBid.text = rubber.latestGame.latestPlay.bidHistory.lastBid.toString()
+            currentBid.text = rubber.latestGame.latestPlay.bidHistory!!.lastBid.toString()
 
             setColorToPlayers(playerArray)
-            currentBidder.text = rubber.playerNames[rubber.latestGame.latestPlay.bidHistory.currentPlayer]
+            currentBidder.text = rubber.playerNames[rubber.latestGame.latestPlay.bidHistory!!.currentPlayer]
         }
 
         nextButton.setOnClickListener{
@@ -173,6 +173,6 @@ class BidActivity : AppCompatActivity() {
         for(player: TextView in playerArray){
             player.setTextColor(Color.BLACK)
         }
-        playerArray[rubber.latestGame.latestPlay.bidHistory.currentPlayer].setTextColor(Color.BLUE)
+        playerArray[rubber.latestGame.latestPlay.bidHistory!!.currentPlayer].setTextColor(Color.BLUE)
     }
 }
