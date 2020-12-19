@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Bridge Assistant</string>
+
+    <string name="button_double">Double</string>
+    <string name="button_redouble">Redouble</string>
+
+    <string name="side_declarer">Declarer</string>
+    <string name="side_defender">Defender</string>
+
+    <string name="no_points">No points</string>
+
+    <string-array name="players">
+        <item name="Player0">North</item>
+        <item name="Player1">East</item>
+        <item name="Player2">South</item>
+        <item name="Player3">West</item>
+    </string-array>
+
+    <string-array name="card_symbol">
+        <item>♣</item>
+        <item>♦</item>
+        <item>♥</item>
+        <item>♠</item>
+        <item>NT</item>
+    </string-array>
+
+    <string-array name="card_color">
+        <item>CLUBS</item>
+        <item>DIAMONDS</item>
+        <item>HEARTS</item>
+        <item>SPADES</item>
+        <item>NOTRUMP</item>
+    </string-array>
+
+    <string-array name="card_number">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+</resources>
