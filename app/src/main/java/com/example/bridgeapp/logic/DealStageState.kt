@@ -7,7 +7,7 @@ import java.util.*
 
 class DealStageState : Parcelable {
     val hands: Array<HandObject?>?
-    var cards: MutableList<String>? = ArrayList()
+    private var cards: MutableList<String>? = ArrayList()
     var currentPlayer: Int
         private set
     private var finished: Boolean
@@ -94,8 +94,8 @@ class DealStageState : Parcelable {
     }
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<DealStageState?> = object : Parcelable.Creator<DealStageState?> {
-            override fun createFromParcel(`in`: Parcel): DealStageState? {
+        @JvmField val CREATOR: Parcelable.Creator<DealStageState> = object : Parcelable.Creator<DealStageState> {
+            override fun createFromParcel(`in`: Parcel): DealStageState {
                 return DealStageState(`in`)
             }
 

@@ -1,5 +1,6 @@
 package com.example.bridgeapp.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -42,5 +43,15 @@ class NewPlayActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+
+    override fun onBackPressed() {
+        val backIntent = Intent ()
+        backIntent.putExtra("rubber_data", rubber)
+        setResult(Activity.RESULT_OK, backIntent)
+
+        println("BACK PRESSED, DATA SENT")
+
+        finish()
     }
 }

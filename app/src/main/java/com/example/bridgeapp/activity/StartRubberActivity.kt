@@ -1,5 +1,6 @@
 package com.example.bridgeapp.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -53,7 +54,7 @@ class StartRubberActivity : AppCompatActivity(), EditNamesDialog.EditNamesDialog
             intent = Intent (this, NewPlayActivity::class.java)
             intent.putExtra("rubber_data", rubber)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
+            startActivityForResult(intent, 100)
             finish()
         }
     }

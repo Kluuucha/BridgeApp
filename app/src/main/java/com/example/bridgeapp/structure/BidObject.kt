@@ -65,8 +65,8 @@ class BidObject : Comparable<BidObject>, Parcelable {
     }
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<BidObject?> = object : Parcelable.Creator<BidObject?> {
-            override fun createFromParcel(`in`: Parcel): BidObject? {
+        @JvmField val CREATOR: Parcelable.Creator<BidObject> = object : Parcelable.Creator<BidObject> {
+            override fun createFromParcel(`in`: Parcel): BidObject {
                 return BidObject(`in`)
             }
 
