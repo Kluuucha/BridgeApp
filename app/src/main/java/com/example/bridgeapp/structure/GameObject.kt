@@ -2,9 +2,10 @@ package com.example.bridgeapp.structure
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.io.Serializable
 import java.util.*
 
-class GameObject : Parcelable {
+class GameObject : Parcelable, Serializable {
     val plays: MutableList<PlayObject>?
     var isFinished: Boolean
         private set

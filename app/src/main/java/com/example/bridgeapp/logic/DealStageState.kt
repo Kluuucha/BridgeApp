@@ -4,8 +4,9 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.example.bridgeapp.structure.HandObject
 import java.util.*
+import java.io.Serializable
 
-class DealStageState : Parcelable {
+class DealStageState : Parcelable, Serializable {
     val hands: Array<HandObject?>?
     private var cards: MutableList<String>? = ArrayList()
     var currentPlayer: Int

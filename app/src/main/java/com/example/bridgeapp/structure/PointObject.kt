@@ -2,8 +2,9 @@ package com.example.bridgeapp.structure
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.io.Serializable
 
-class PointObject : Parcelable {
+class PointObject : Parcelable, Serializable {
     val points: Int
     val label: String?
 

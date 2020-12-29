@@ -3,8 +3,9 @@ package com.example.bridgeapp.structure
 import android.os.Parcel
 import android.os.Parcelable
 import com.example.bridgeapp.util.CardSuit
+import java.io.Serializable
 
-class ContractObject : Parcelable {
+class ContractObject : Parcelable, Serializable {
     val number: Int
     val suit: CardSuit?
     val doubleVal: Int

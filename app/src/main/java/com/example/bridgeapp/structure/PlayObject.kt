@@ -6,8 +6,9 @@ import com.example.bridgeapp.logic.BidStageState
 import com.example.bridgeapp.logic.DealStageState
 import com.example.bridgeapp.logic.PointStageState
 import com.example.bridgeapp.util.GameStage
+import java.io.Serializable
 
-class PlayObject : Parcelable {
+class PlayObject : Parcelable, Serializable {
     val dealingPlayer: Int
     var stage: GameStage
     var dealHistory: DealStageState? = null

@@ -4,8 +4,9 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.example.bridgeapp.util.CardSuit
 import com.example.bridgeapp.util.CardValue
+import java.io.Serializable
 
-class HandObject : Parcelable {
+class HandObject : Parcelable, Serializable {
     val suits: Array<SuitObject?>?
 
     constructor() {

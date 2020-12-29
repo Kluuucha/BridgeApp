@@ -5,8 +5,9 @@ import android.os.Parcelable
 import com.example.bridgeapp.structure.BidObject
 import com.example.bridgeapp.structure.ContractObject
 import java.util.*
+import java.io.Serializable
 
-class BidStageState : Parcelable {
+class BidStageState : Parcelable, Serializable {
     val bidList: MutableList<BidObject>?
     var currentPlayer: Int
         private set

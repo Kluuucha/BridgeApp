@@ -2,9 +2,11 @@ package com.example.bridgeapp.structure
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.io.Serializable
 import java.util.*
 
-class RubberObject : Parcelable {
+
+class RubberObject : Parcelable, Serializable {
     val games: MutableList<GameObject>?
     lateinit var playerNames: Array<String>
     private var finished: Boolean

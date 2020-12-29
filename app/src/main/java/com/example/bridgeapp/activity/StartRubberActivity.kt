@@ -3,6 +3,7 @@ package com.example.bridgeapp.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -52,9 +53,9 @@ class StartRubberActivity : AppCompatActivity(), EditNamesDialog.EditNamesDialog
         start.setOnClickListener {
             val rubber = RubberObject(firstDealer.selectedItemPosition, playerNames)
             intent = Intent (this, NewPlayActivity::class.java)
-            intent.putExtra("rubber_data", rubber)
+            intent.putExtra("rubber_data", rubber as Parcelable)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivityForResult(intent, 100)
+            startActivity(intent)
             finish()
         }
     }

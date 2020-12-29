@@ -3,11 +3,16 @@ package com.example.bridgeapp.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.example.bridgeapp.R
 import com.example.bridgeapp.structure.RubberObject
+import java.io.File
+import java.io.FileOutputStream
+import java.io.ObjectOutput
+import java.io.ObjectOutputStream
 
 class PlayerHandActivity : AppCompatActivity() {
 
@@ -37,14 +42,35 @@ class PlayerHandActivity : AppCompatActivity() {
 
         startButton.setOnClickListener {
             intent = Intent (this, DealActivity::class.java)
-            intent.putExtra("rubber_data", rubber)
+            intent.putExtra("rubber_data", rubber as Parcelable)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
             finish()
         }
-
-
     }
 
+    override fun onBackPressed() {
+        intent = Intent (this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+        finish()
+    }
 
+    override fun onDestroy() {
+        saveGame(rubber, this::class.java)
+        super.onDestroy()
+    }
+
+    fun saveGame(rubber: RubberObject, activity: Class<*>) {
+        val out: ObjectOutput
+        try {
+            val outFile = File(filesDir,"rubber_save.data")
+            out = ObjectOutputStream(FileOutputStream(outFile))
+            out.writeObject(activity)
+            out.writeObject(rubber)
+            out.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }

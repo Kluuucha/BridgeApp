@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -12,6 +13,10 @@ import com.example.bridgeapp.structure.HandObject
 import com.example.bridgeapp.structure.RubberObject
 import com.example.bridgeapp.util.CardSuit
 import com.example.bridgeapp.util.CardValue
+import java.io.File
+import java.io.FileOutputStream
+import java.io.ObjectOutput
+import java.io.ObjectOutputStream
 
 class DealActivity : AppCompatActivity(), View.OnClickListener{
 
@@ -83,14 +88,14 @@ class DealActivity : AppCompatActivity(), View.OnClickListener{
 
             if(rubber.latestGame.latestPlay.dealHistory!!.currentPlayer == rubber.latestGame.latestPlay.dealingPlayer){
                 intent = Intent (this, HandCheckActivity::class.java)
-                intent.putExtra("rubber_data", rubber)
+                intent.putExtra("rubber_data", rubber as Parcelable)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)
                 finish()
             }
             else{
                 intent = Intent (this, PlayerHandActivity::class.java)
-                intent.putExtra("rubber_data", rubber)
+                intent.putExtra("rubber_data", rubber as Parcelable)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)
                 finish()
@@ -119,6 +124,31 @@ class DealActivity : AppCompatActivity(), View.OnClickListener{
             cardsCount.text = cardCountText
 
             setHandButton.isEnabled = rubber.latestGame.latestPlay.dealHistory!!.cardCount() == 13
+        }
+    }
+
+    override fun onBackPressed() {
+        intent = Intent (this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+        finish()
+    }
+
+    override fun onDestroy() {
+        saveGame(rubber, this::class.java)
+        super.onDestroy()
+    }
+
+    fun saveGame(rubber: RubberObject, activity: Class<*>) {
+        val out: ObjectOutput
+        try {
+            val outFile = File(filesDir,"rubber_save.data")
+            out = ObjectOutputStream(FileOutputStream(outFile))
+            out.writeObject(activity)
+            out.writeObject(rubber)
+            out.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }

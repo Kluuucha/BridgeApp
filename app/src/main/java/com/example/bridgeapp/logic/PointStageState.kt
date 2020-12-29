@@ -7,11 +7,12 @@ import com.example.bridgeapp.structure.HandObject
 import com.example.bridgeapp.structure.PointObject
 import com.example.bridgeapp.util.CardSuit
 import java.util.*
+import java.io.Serializable
 
 /*
 NOTE:   The only score you cannot get from this class is a bonus for winning rubber (2 games).
 */
-class PointStageState : Parcelable {
+class PointStageState : Parcelable, Serializable {
     val pointsBelowLine: MutableList<PointObject>?
     val pointsAboveLine: MutableList<PointObject>?
     val pointsDefence: MutableList<PointObject>?

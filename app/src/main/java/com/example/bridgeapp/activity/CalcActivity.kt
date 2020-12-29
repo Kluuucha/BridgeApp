@@ -2,6 +2,7 @@ package com.example.bridgeapp.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,10 @@ import com.example.bridgeapp.structure.HandObject
 import com.example.bridgeapp.structure.RubberObject
 import com.example.bridgeapp.util.CardSuit
 import com.example.bridgeapp.util.GameStage
+import java.io.File
+import java.io.FileOutputStream
+import java.io.ObjectOutput
+import java.io.ObjectOutputStream
 
 class CalcActivity : AppCompatActivity() {
 
@@ -92,7 +97,7 @@ class CalcActivity : AppCompatActivity() {
 
         next.setOnClickListener {
             intent = Intent (this, ScoreActivity::class.java)
-            intent.putExtra("rubber_data", rubber)
+            intent.putExtra("rubber_data", rubber as Parcelable)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
             finish()
@@ -126,6 +131,31 @@ class CalcActivity : AppCompatActivity() {
             }
             else
                 Toast.makeText(applicationContext, "Taken tricks must be between 0 and 13", Toast.LENGTH_SHORT).show() // TODO: different way of notification
+        }
+    }
+
+    override fun onBackPressed() {
+        intent = Intent (this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+        finish()
+    }
+
+    override fun onDestroy() {
+        saveGame(rubber, this::class.java)
+        super.onDestroy()
+    }
+
+    fun saveGame(rubber: RubberObject, activity: Class<*>) {
+        val out: ObjectOutput
+        try {
+            val outFile = File(filesDir,"rubber_save.data")
+            out = ObjectOutputStream(FileOutputStream(outFile))
+            out.writeObject(activity)
+            out.writeObject(rubber)
+            out.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }
