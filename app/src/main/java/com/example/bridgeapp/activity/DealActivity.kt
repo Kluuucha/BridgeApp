@@ -13,10 +13,6 @@ import com.example.bridgeapp.structure.HandObject
 import com.example.bridgeapp.structure.RubberObject
 import com.example.bridgeapp.util.CardSuit
 import com.example.bridgeapp.util.CardValue
-import java.io.File
-import java.io.FileOutputStream
-import java.io.ObjectOutput
-import java.io.ObjectOutputStream
 
 class DealActivity : AppCompatActivity(), View.OnClickListener{
 
