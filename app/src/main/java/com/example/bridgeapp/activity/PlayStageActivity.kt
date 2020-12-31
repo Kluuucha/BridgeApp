@@ -59,7 +59,7 @@ class PlayStageActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    fun saveGame(rubber: RubberObject, activity: Class<*>) {
+    private fun saveGame(rubber: RubberObject, activity: Class<*>) {
         val out: ObjectOutput
         try {
             val outFile = File(filesDir,"rubber_save.data")

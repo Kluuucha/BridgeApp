@@ -22,7 +22,7 @@ class CalcActivity : AppCompatActivity() {
 
     private var rubber = RubberObject()
     private var contract = ContractObject()
-
+    private var isSeparate = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +38,11 @@ class CalcActivity : AppCompatActivity() {
         if (extras != null) {
             if(extras.containsKey("rubber_data")) {
                 rubber = (extras.get("rubber_data") as RubberObject)
-                rubber.latestGame.latestPlay.pointHistory = PointStageState()
+                isSeparate = false
             }
         }
+
+        rubber.latestGame.latestPlay.pointHistory = PointStageState()
 
         rubber.latestGame.latestPlay.stage = GameStage.SCORING
 
@@ -64,8 +66,7 @@ class CalcActivity : AppCompatActivity() {
         val calculate: Button = findViewById<View>(R.id.calculate) as Button
         val next: Button = findViewById<View>(R.id.overviewButton) as Button
 
-        if (extras != null) {
-            if(extras.containsKey("rubber_data")) {
+        if (!isSeparate) {
                 numbers.setSelection(rubber.latestGame.latestPlay.bidHistory!!.contract.number - 1)
                 suit.setSelection(rubber.latestGame.latestPlay.bidHistory!!.contract.suit!!.ordinal)
                 if(rubber.latestGame.latestPlay.bidHistory!!.contract.doubleVal == 1){
@@ -81,7 +82,6 @@ class CalcActivity : AppCompatActivity() {
 
                 spinnerRow.visibility = View.INVISIBLE
                 doubleRow.visibility = View.GONE
-            }
         }
 
 
@@ -95,35 +95,30 @@ class CalcActivity : AppCompatActivity() {
                 isDouble.toggle()
         }
 
-        next.setOnClickListener {
-            intent = Intent (this, ScoreActivity::class.java)
-            intent.putExtra("rubber_data", rubber as Parcelable)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-            finish()
-        }
-
         calculate.setOnClickListener {
-            next.visibility = View.VISIBLE
+            if (!isSeparate) {
+                next.visibility = View.VISIBLE
+            }
 
             val tricksTaken = Integer.parseInt(tricks.text.toString())
 
             if(PointStageState.areTricksCorrect(tricksTaken)) {
-                if (extras != null) {
-                    if(!extras.containsKey("rubber_data")){
-                        var doubleValue = 0
-                        if (isRedouble.isChecked)
-                            doubleValue = 2
-                        else if (isDouble.isChecked)
-                            doubleValue = 1
-
-                        contract = ContractObject(Integer.parseInt(numbers.selectedItem.toString()), CardSuit.valueOf(suit.selectedItem.toString()), doubleValue, 0)
-                    }
-                    else
-                        contract = rubber.latestGame.latestPlay.contract!!
+                if (extras != null && !extras.containsKey("rubber_data")) {
+                    contract = rubber.latestGame.latestPlay.contract!!
+                    @Suppress("UNCHECKED_CAST")
+                    rubber.latestGame.latestPlay.pointHistory!!.setPoints(tricksTaken, contract, rubber.getVulnerability(contract.player%2), rubber.getVulnerability((contract.player+1)%2), rubber.winner, rubber.latestGame.latestPlay.hands as Array<HandObject>)
                 }
-                @Suppress("UNCHECKED_CAST")
-                rubber.latestGame.latestPlay.pointHistory!!.setPoints(tricksTaken, contract, rubber.getVulnerability(contract.player%2), rubber.getVulnerability((contract.player+1)%2), rubber.winner, rubber.latestGame.latestPlay.hands as Array<HandObject>)
+                else{
+                    var doubleValue = 0
+                    if (isRedouble.isChecked)
+                        doubleValue = 2
+                    else if (isDouble.isChecked)
+                        doubleValue = 1
+
+                    contract = ContractObject(Integer.parseInt(numbers.selectedItem.toString()), CardSuit.valueOf(resources.getStringArray(
+                            R.array.card_color
+                    )[suit.selectedItemPosition].toString()), doubleValue, 0)
+                }
 
                 outcome.text = rubber.latestGame.latestPlay.pointHistory!!.scoreContract(tricksTaken, contract).toString()
                 overtricks.text = rubber.latestGame.latestPlay.pointHistory!!.scoreOvertricks(tricksTaken, contract, rubber.getVulnerability(contract.player%2)).toString()
@@ -131,6 +126,14 @@ class CalcActivity : AppCompatActivity() {
             }
             else
                 Toast.makeText(applicationContext, "Taken tricks must be between 0 and 13", Toast.LENGTH_SHORT).show() // TODO: different way of notification
+        }
+
+        next.setOnClickListener {
+            intent = Intent (this, ScoreActivity::class.java)
+            intent.putExtra("rubber_data", rubber as Parcelable)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -142,11 +145,13 @@ class CalcActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        saveGame(rubber, this::class.java)
+        if (!isSeparate) {
+            saveGame(rubber, this::class.java)
+        }
         super.onDestroy()
     }
 
-    fun saveGame(rubber: RubberObject, activity: Class<*>) {
+    private fun saveGame(rubber: RubberObject, activity: Class<*>) {
         val out: ObjectOutput
         try {
             val outFile = File(filesDir,"rubber_save.data")

@@ -25,12 +25,18 @@ class MainActivity : AppCompatActivity() {
 
         val start = findViewById<View>(R.id.startAppButton) as Button
         val resume = findViewById<View>(R.id.resumeGameButton) as Button
+        val delete = findViewById<View>(R.id.deleteGameButton) as Button
         resume.isEnabled = false
+        delete.isEnabled = false
+
+        val bidding = findViewById<View>(R.id.biddingAssistantButton) as Button
+        val calculator = findViewById<View>(R.id.pointCalculatorButton) as Button
 
         val file = File(filesDir, "rubber_save.data")
 
         if(file.exists()){
             resume.isEnabled = true
+            delete.isEnabled = true
         }
 
         start.setOnClickListener {
@@ -45,7 +51,21 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        delete.setOnClickListener {//TODO: Add pop-up "Do you really want to delete"
+            file.delete()
+            resume.isEnabled = false
+            delete.isEnabled = false
+        }
 
+        bidding.setOnClickListener {
+            intent = Intent (this, BidActivity::class.java)
+            startActivity(intent)
+        }
+
+        calculator.setOnClickListener {
+            intent = Intent (this, CalcActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun loadGame() {

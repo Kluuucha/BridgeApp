@@ -19,6 +19,7 @@ import java.io.ObjectOutputStream
 class BidActivity : AppCompatActivity() {
 
     private var rubber = RubberObject()
+    private var isSeparate = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,7 @@ class BidActivity : AppCompatActivity() {
         if (extras != null) {
             if(extras.containsKey("rubber_data")) {
                 rubber = (extras.get("rubber_data") as RubberObject)
+                isSeparate = false
             }
         }
 
@@ -110,7 +112,10 @@ class BidActivity : AppCompatActivity() {
                 contractLabel.visibility = View.VISIBLE
                 contractor.visibility = View.VISIBLE
                 contractorLabel.visibility = View.VISIBLE
-                nextButton.visibility = View.VISIBLE
+
+                if (!isSeparate) {
+                    nextButton.visibility = View.VISIBLE
+                }
 
                 currentBidder.visibility = View.INVISIBLE
                 currentBidderLabel.visibility = View.INVISIBLE
@@ -192,7 +197,9 @@ class BidActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        saveGame(rubber, this::class.java)
+        if (!isSeparate) {
+            saveGame(rubber, this::class.java)
+        }
         super.onDestroy()
     }
 

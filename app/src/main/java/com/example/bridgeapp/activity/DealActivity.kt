@@ -133,22 +133,4 @@ class DealActivity : AppCompatActivity(), View.OnClickListener{
         startActivity(intent)
         finish()
     }
-
-    override fun onDestroy() {
-        saveGame(rubber, this::class.java)
-        super.onDestroy()
-    }
-
-    fun saveGame(rubber: RubberObject, activity: Class<*>) {
-        val out: ObjectOutput
-        try {
-            val outFile = File(filesDir,"rubber_save.data")
-            out = ObjectOutputStream(FileOutputStream(outFile))
-            out.writeObject(activity)
-            out.writeObject(rubber)
-            out.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
 }

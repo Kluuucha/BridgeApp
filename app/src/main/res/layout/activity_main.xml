@@ -6,23 +6,133 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-    <Button
-        android:id="@+id/startAppButton"
+    <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/resumeGameButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Resume"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startAppButton" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Step-by-step Assistant" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/startAppButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawableTop="@android:drawable/ic_media_play"
+                        android:insetLeft="6dp"
+                        android:insetRight="6dp"
+                        android:paddingTop="16dp"
+                        android:text="Start"
+                        app:iconPadding="0dp" />
+
+                    <TableLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <Button
+                                android:id="@+id/resumeGameButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:insetLeft="6dp"
+                                android:insetRight="6dp"
+                                android:text="Resume"
+                                app:icon="@android:drawable/ic_media_ff"
+                                app:iconTint="#FFFFFF" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <Button
+                                android:id="@+id/deleteGameButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:insetLeft="6dp"
+                                android:insetRight="6dp"
+                                android:text="Clear save"
+                                app:icon="@android:drawable/ic_menu_close_clear_cancel"
+                                app:iconTint="#FFFFFF"
+                                app:iconTintMode="src_atop" />
+                        </TableRow>
+
+                    </TableLayout>
+                </TableRow>
+
+            </TableLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Other Tools" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <Button
+                        android:id="@+id/biddingAssistantButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:insetLeft="6dp"
+                        android:insetRight="6dp"
+                        android:text="Bidding\nAssistant"
+                        android:drawableTop="@android:drawable/ic_popup_reminder" />
+
+                    <Button
+                        android:id="@+id/pointCalculatorButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:insetLeft="6dp"
+                        android:insetRight="6dp"
+                        android:text="Point\nCalculator"
+                        android:drawableTop="@android:drawable/ic_dialog_dialer" />
+                </TableRow>
+
+            </TableLayout>
+        </TableRow>
+    </TableLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
