@@ -11,12 +11,9 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import com.example.bridgeapp.R
+import com.example.bridgeapp.fileOperations.TempRubber
 import com.example.bridgeapp.structure.PointObject
 import com.example.bridgeapp.structure.RubberObject
-import java.io.File
-import java.io.FileOutputStream
-import java.io.ObjectOutput
-import java.io.ObjectOutputStream
 
 class ScoreActivity : AppCompatActivity() {
 
@@ -39,7 +36,7 @@ class ScoreActivity : AppCompatActivity() {
             }
         }
 
-        val table = findViewById<View>(R.id.scoreOveviewTable) as TableLayout
+        val table = findViewById<View>(R.id.scoreOverviewTable) as TableLayout
 
         val next = findViewById<View>(R.id.scoreNextButton) as Button
 
@@ -179,20 +176,7 @@ class ScoreActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        saveGame(rubber, this::class.java)
+        TempRubber.saveRubber(filesDir, rubber, this::class.java)
         super.onDestroy()
-    }
-
-    fun saveGame(rubber: RubberObject, activity: Class<*>) {
-        val out: ObjectOutput
-        try {
-            val outFile = File(filesDir,"rubber_save.data")
-            out = ObjectOutputStream(FileOutputStream(outFile))
-            out.writeObject(activity)
-            out.writeObject(rubber)
-            out.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 }

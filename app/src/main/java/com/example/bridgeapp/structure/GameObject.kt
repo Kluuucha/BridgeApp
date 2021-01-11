@@ -2,7 +2,7 @@ package com.example.bridgeapp.structure
 
 import android.os.Parcel
 import android.os.Parcelable
-import java.io.Serializable
+import java.io.*
 import java.util.*
 
 class GameObject : Parcelable, Serializable {

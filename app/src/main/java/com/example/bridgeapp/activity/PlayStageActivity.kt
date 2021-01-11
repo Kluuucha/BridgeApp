@@ -7,12 +7,8 @@ import android.os.Parcelable
 import android.view.View
 import android.widget.Button
 import com.example.bridgeapp.R
+import com.example.bridgeapp.fileOperations.TempRubber
 import com.example.bridgeapp.structure.RubberObject
-import com.example.bridgeapp.util.GameStage
-import java.io.File
-import java.io.FileOutputStream
-import java.io.ObjectOutput
-import java.io.ObjectOutputStream
 
 class PlayStageActivity : AppCompatActivity() {
     private var rubber = RubberObject()
@@ -34,9 +30,7 @@ class PlayStageActivity : AppCompatActivity() {
             }
         }
 
-        rubber.latestGame.latestPlay.stage = GameStage.PLAY
-
-        val next = findViewById<View>(R.id.playPahseNextButton) as Button
+        val next = findViewById<View>(R.id.playPhaseNextButton) as Button
 
         next.setOnClickListener {
             intent = Intent (this, CalcActivity::class.java)
@@ -55,20 +49,7 @@ class PlayStageActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        saveGame(rubber, this::class.java)
+        TempRubber.saveRubber(filesDir, rubber, this::class.java)
         super.onDestroy()
-    }
-
-    private fun saveGame(rubber: RubberObject, activity: Class<*>) {
-        val out: ObjectOutput
-        try {
-            val outFile = File(filesDir,"rubber_save.data")
-            out = ObjectOutputStream(FileOutputStream(outFile))
-            out.writeObject(activity)
-            out.writeObject(rubber)
-            out.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 }

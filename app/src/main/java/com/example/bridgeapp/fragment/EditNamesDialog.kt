@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatDialogFragment
 import com.example.bridgeapp.R
 
+
 class EditNamesDialog : AppCompatDialogFragment() {
     private var listener: EditNamesDialogListener? = null
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -34,7 +35,10 @@ class EditNamesDialog : AppCompatDialogFragment() {
                             players[3].text.toString())
                     listener!!.applyNames(names)
                 }
+
         return builder.create()
+
+
     }
 
     override fun onAttach(context: Context) {

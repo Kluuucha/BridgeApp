@@ -7,12 +7,8 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bridgeapp.R
+import com.example.bridgeapp.fileOperations.TempRubber
 import com.example.bridgeapp.structure.RubberObject
-import com.example.bridgeapp.util.GameStage
-import java.io.File
-import java.io.FileOutputStream
-import java.io.ObjectOutput
-import java.io.ObjectOutputStream
 
 class StartBidStageActivity : AppCompatActivity() {
 
@@ -35,8 +31,6 @@ class StartBidStageActivity : AppCompatActivity() {
             }
         }
 
-        rubber.latestGame.latestPlay.stage = GameStage.BIDDING
-
         val startButton = findViewById<View>(R.id.startAuctionButton) as Button
 
         startButton.setOnClickListener {
@@ -57,20 +51,7 @@ class StartBidStageActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        saveGame(rubber, this::class.java)
+        TempRubber.saveRubber(filesDir, rubber, this::class.java)
         super.onDestroy()
-    }
-
-    fun saveGame(rubber: RubberObject, activity: Class<*>) {
-        val out: ObjectOutput
-        try {
-            val outFile = File(filesDir,"rubber_save.data")
-            out = ObjectOutputStream(FileOutputStream(outFile))
-            out.writeObject(activity)
-            out.writeObject(rubber)
-            out.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 }

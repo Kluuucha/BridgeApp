@@ -2,13 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/summary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.SummaryActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -34,7 +32,6 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/weLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -44,7 +41,6 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/theyLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -59,14 +55,12 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/wePlayers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="North/South" />
 
                 <TextView
-                    android:id="@+id/theyPlayers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -106,7 +100,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/lineVertical"
             android:layout_width="2dp"
             android:layout_height="0dp"
             android:background="#c0c0c0"

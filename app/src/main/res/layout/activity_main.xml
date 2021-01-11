@@ -19,7 +19,6 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Step-by-step Assistant" />
@@ -31,11 +30,13 @@
 
             <TableLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:ignore="UselessParent">
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    tools:ignore="UselessParent">
 
                     <Button
                         android:id="@+id/startAppButton"
@@ -94,7 +95,6 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Other Tools" />
@@ -106,11 +106,13 @@
 
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:ignore="UselessParent">
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
 
                     <Button
                         android:id="@+id/biddingAssistantButton"
@@ -119,7 +121,8 @@
                         android:insetLeft="6dp"
                         android:insetRight="6dp"
                         android:text="Bidding\nAssistant"
-                        android:drawableTop="@android:drawable/ic_popup_reminder" />
+                        android:drawableTop="@android:drawable/ic_popup_reminder"
+                        tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/pointCalculatorButton"
@@ -128,7 +131,8 @@
                         android:insetLeft="6dp"
                         android:insetRight="6dp"
                         android:text="Point\nCalculator"
-                        android:drawableTop="@android:drawable/ic_dialog_dialer" />
+                        android:drawableTop="@android:drawable/ic_dialog_dialer"
+                        tools:ignore="ButtonStyle" />
                 </TableRow>
 
             </TableLayout>

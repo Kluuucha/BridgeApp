@@ -5,12 +5,10 @@ import android.os.Parcelable
 import com.example.bridgeapp.logic.BidStageState
 import com.example.bridgeapp.logic.DealStageState
 import com.example.bridgeapp.logic.PointStageState
-import com.example.bridgeapp.util.GameStage
 import java.io.Serializable
 
 class PlayObject : Parcelable, Serializable {
     val dealingPlayer: Int
-    var stage: GameStage
     var dealHistory: DealStageState? = null
     var bidHistory: BidStageState? = null
     var pointHistory: PointStageState? = null
@@ -19,7 +17,6 @@ class PlayObject : Parcelable, Serializable {
 
     constructor(dealingPlayer: Int) {
         this.dealingPlayer = dealingPlayer
-        stage = GameStage.DEAL
         isNoPointPlay = false
     }
 
@@ -38,7 +35,6 @@ class PlayObject : Parcelable, Serializable {
 
     constructor(`in`: Parcel) {
         dealingPlayer = `in`.readInt()
-        stage = GameStage.valueOf(`in`.readString()!!)
         dealHistory = `in`.readTypedObject(DealStageState.CREATOR)
         bidHistory = `in`.readTypedObject(BidStageState.CREATOR)
         pointHistory = `in`.readTypedObject(PointStageState.CREATOR)
@@ -51,7 +47,6 @@ class PlayObject : Parcelable, Serializable {
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeInt(dealingPlayer)
-        dest.writeString(stage.name)
         dest.writeTypedObject(dealHistory, 0)
         dest.writeTypedObject(bidHistory, 0)
         dest.writeTypedObject(pointHistory, 0)

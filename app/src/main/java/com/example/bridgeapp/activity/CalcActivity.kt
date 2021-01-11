@@ -7,16 +7,12 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bridgeapp.R
+import com.example.bridgeapp.fileOperations.TempRubber
 import com.example.bridgeapp.logic.PointStageState
 import com.example.bridgeapp.structure.ContractObject
 import com.example.bridgeapp.structure.HandObject
 import com.example.bridgeapp.structure.RubberObject
 import com.example.bridgeapp.util.CardSuit
-import com.example.bridgeapp.util.GameStage
-import java.io.File
-import java.io.FileOutputStream
-import java.io.ObjectOutput
-import java.io.ObjectOutputStream
 
 class CalcActivity : AppCompatActivity() {
 
@@ -44,8 +40,6 @@ class CalcActivity : AppCompatActivity() {
 
         rubber.latestGame.latestPlay.pointHistory = PointStageState()
 
-        rubber.latestGame.latestPlay.stage = GameStage.SCORING
-
         val contractText = findViewById<View>(R.id.calcContractText) as TextView
 
         val spinnerRow = findViewById<View>(R.id.spinnerRow) as TableRow
@@ -60,7 +54,7 @@ class CalcActivity : AppCompatActivity() {
         val tricks = findViewById<View>(R.id.editTextNumber) as EditText
 
         val outcome = findViewById<View>(R.id.outcome) as TextView
-        val overtricks = findViewById<View>(R.id.overtickOutcome) as TextView
+        val overtricks = findViewById<View>(R.id.overtrickOutcome) as TextView
         val mishaps = findViewById<View>(R.id.mishapOutcome) as TextView
 
         val calculate: Button = findViewById<View>(R.id.calculate) as Button
@@ -96,14 +90,11 @@ class CalcActivity : AppCompatActivity() {
         }
 
         calculate.setOnClickListener {
-            if (!isSeparate) {
-                next.visibility = View.VISIBLE
-            }
-
             val tricksTaken = Integer.parseInt(tricks.text.toString())
 
             if(PointStageState.areTricksCorrect(tricksTaken)) {
-                if (extras != null && !extras.containsKey("rubber_data")) {
+                if (!isSeparate) {
+                    next.visibility = View.VISIBLE
                     contract = rubber.latestGame.latestPlay.contract!!
                     @Suppress("UNCHECKED_CAST")
                     rubber.latestGame.latestPlay.pointHistory!!.setPoints(tricksTaken, contract, rubber.getVulnerability(contract.player%2), rubber.getVulnerability((contract.player+1)%2), rubber.winner, rubber.latestGame.latestPlay.hands as Array<HandObject>)
@@ -146,21 +137,8 @@ class CalcActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         if (!isSeparate) {
-            saveGame(rubber, this::class.java)
+            TempRubber.saveRubber(filesDir, rubber, this::class.java)
         }
         super.onDestroy()
-    }
-
-    private fun saveGame(rubber: RubberObject, activity: Class<*>) {
-        val out: ObjectOutput
-        try {
-            val outFile = File(filesDir,"rubber_save.data")
-            out = ObjectOutputStream(FileOutputStream(outFile))
-            out.writeObject(activity)
-            out.writeObject(rubber)
-            out.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 }

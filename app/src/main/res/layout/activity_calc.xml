@@ -75,10 +75,12 @@
         android:layout_height="46dp"
         android:ems="10"
         android:inputType="number"
+        android:hint="0"
         android:text="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/doubleRow" />
+        app:layout_constraintTop_toBottomOf="@+id/doubleRow"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/calculate"
@@ -124,12 +126,10 @@
         app:layout_constraintTop_toBottomOf="@+id/outcome">
 
         <TableRow
-            android:id="@+id/extraLabels"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/overtrickLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -137,7 +137,6 @@
                 android:text="Overtricks:" />
 
             <TextView
-                android:id="@+id/mishapLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -145,12 +144,11 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/extraOutput"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/overtickOutcome"
+                android:id="@+id/overtrickOutcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

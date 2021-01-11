@@ -21,7 +21,6 @@
             tools:ignore="UselessParent">
 
             <TextView
-                android:id="@+id/labelClubs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
@@ -30,7 +29,6 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/labelDiamonds"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
@@ -39,7 +37,6 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/labelHearts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="3"
@@ -48,7 +45,6 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/labelSpades"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="4"
@@ -83,7 +79,6 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cards selected:"

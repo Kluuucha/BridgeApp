@@ -21,7 +21,6 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/errorTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -36,12 +35,11 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:text="Unforunatelly, card duplicates were found between different players' hands. To avoid revealing any info between the players, you need to input your hands again. Please make sure you select correct cards." />
+                android:text="Unfortunately, card duplicates were found between different players' hands. To avoid revealing any info between the players, you need to input your hands again. Please make sure you select correct cards." />
         </TableRow>
 
         <TableRow
