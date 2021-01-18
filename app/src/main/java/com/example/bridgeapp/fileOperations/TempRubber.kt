@@ -23,13 +23,13 @@ object TempRubber {
         }
     }
 
-    fun saveRubber(file: File, r: RubberObject, activity: Class<*>) {
+    fun saveRubber(file: File, savedRubber: RubberObject, activity: Class<*>) {
         val out: ObjectOutput
         try {
             val outFile = File(file,saveFile)
             out = ObjectOutputStream(FileOutputStream(outFile))
             out.writeObject(activity)
-            out.writeObject(r)
+            out.writeObject(savedRubber)
             out.close()
         } catch (e: Exception) {
             e.printStackTrace()

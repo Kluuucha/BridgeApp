@@ -16,7 +16,7 @@ class EditNamesDialog : AppCompatDialogFragment() {
 
 
         val builder = AlertDialog.Builder(activity)
-        val inflater = activity!!.layoutInflater
+        val inflater = requireActivity().layoutInflater
         val view = inflater.inflate(R.layout.dialog_edit_names, null)
         val players: Array<EditText> = arrayOf(
                 view.findViewById(R.id.editNorth),

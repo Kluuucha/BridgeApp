@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:text="♣"
+                android:text="@string/club"
                 android:layout_gravity="center_horizontal"
                 android:textSize="18sp" />
 
@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
-                android:text="♦"
+                android:text="@string/diamond"
                 android:layout_gravity="center_horizontal"
                 android:textSize="18sp" />
 
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="3"
-                android:text="♥"
+                android:text="@string/heart"
                 android:layout_gravity="center_horizontal"
                 android:textSize="18sp" />
 
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="4"
-                android:text="♠"
+                android:text="@string/spade"
                 android:layout_gravity="center_horizontal"
                 android:textSize="18sp" />
         </TableRow>
@@ -81,7 +81,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cards selected:"
+                android:text="@string/label_cards"
                 android:layout_gravity="center_horizontal"/>
         </TableRow>
 
@@ -93,11 +93,11 @@
                 android:id="@+id/cardsCounter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0/13"
+                android:text="@string/card_count_default"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal" />
         </TableRow>
 
         <TableRow
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="0dp"
-                android:text="Next" />
+                android:text="@string/next" />
         </TableRow>
     </TableLayout>
 

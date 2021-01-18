@@ -46,7 +46,7 @@
                         android:insetLeft="6dp"
                         android:insetRight="6dp"
                         android:paddingTop="16dp"
-                        android:text="Start"
+                        android:text="@string/start"
                         app:iconPadding="0dp" />
 
                     <TableLayout

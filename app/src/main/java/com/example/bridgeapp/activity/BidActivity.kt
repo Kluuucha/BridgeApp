@@ -162,20 +162,15 @@ class BidActivity : AppCompatActivity() {
         }
 
         nextButton.setOnClickListener{
-            if(rubber.latestGame.latestPlay.isNoPointPlay){
-                intent = Intent (this, ScoreActivity::class.java)
-                intent.putExtra("rubber_data", rubber as Parcelable)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                startActivity(intent)
-                finish()
+            intent = if(rubber.latestGame.latestPlay.isNoPointPlay){
+                Intent (this, ScoreActivity::class.java)
+            } else{
+                Intent (this, PlayStageActivity::class.java)
             }
-            else{
-                intent = Intent (this, PlayStageActivity::class.java)
-                intent.putExtra("rubber_data", rubber as Parcelable)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                startActivity(intent)
-                finish()
-            }
+            intent.putExtra("rubber_data", rubber as Parcelable)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+            finish()
         }
     }
 

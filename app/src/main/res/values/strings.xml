@@ -3,17 +3,42 @@
 
     <string name="button_double">Double</string>
     <string name="button_redouble">Redouble</string>
+    <string name="button_calculate">Calculate</string>
 
     <string name="side_declarer">Declarer</string>
     <string name="side_defender">Defender</string>
 
     <string name="no_points">No points</string>
 
+    <string name="none">None</string>
+
+    <string name="we">We</string>
+    <string name="they">They</string>
+
+    <string name="north">North</string>
+    <string name="south">South</string>
+    <string name="east">East</string>
+    <string name="west">West</string>
+
+    <string name="start">Start</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+
+    <string name="bid">Bid</string>
+    <string name="pass">Pass</string>
+
+    <string name="label_contract">Contract:</string>
+    <string name="label_declaration">Declared by::</string>
+    <string name="label_bidding">Now Bidding:</string>
+    <string name="label_overtricks">Overtricks:</string>
+    <string name="label_mishaps">Mishaps:</string>
+    <string name="label_cards">Cards selected:</string>
+
     <string-array name="players">
-        <item name="Player0">North</item>
-        <item name="Player1">East</item>
-        <item name="Player2">South</item>
-        <item name="Player3">West</item>
+        <item>North</item>
+        <item>East</item>
+        <item>South</item>
+        <item>West</item>
     </string-array>
 
     <string-array name="card_symbol">
@@ -23,6 +48,12 @@
         <item>♠</item>
         <item>NT</item>
     </string-array>
+
+    <string name="club">♣</string>
+    <string name="diamond">♦</string>
+    <string name="heart">♥</string>
+    <string name="spade">♠</string>
+    <string name="notrump">NT</string>
 
     <string-array name="card_color">
         <item>CLUBS</item>
@@ -41,5 +72,8 @@
         <item>6</item>
         <item>7</item>
     </string-array>
+
+    <string name="card_count_default">0/13</string>
+    <string name="zero">0</string>
 
 </resources>
